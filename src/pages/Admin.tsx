@@ -4,7 +4,7 @@ interface AdminProps {
 
 }
 
-const Admin: React.FC = (props) => {
+const Admin: React.FC<AdminProps> = (props) => {
     return (
         <React.Fragment>
             <h1>Admin Page</h1>

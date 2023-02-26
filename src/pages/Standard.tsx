@@ -4,7 +4,7 @@ interface StandardProps {
 
 }
 
-const Standard: React.FC = (props) => {
+const Standard: React.FC<StandardProps> = (props) => {
     return (
         <React.Fragment>
             <h1>Standard Page</h1>
