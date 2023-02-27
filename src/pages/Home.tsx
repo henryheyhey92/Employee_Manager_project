@@ -12,9 +12,20 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = (props) => {
     const { login } = useContext(LoginContext)
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [userInfo, setUser] = useState<any>({
+        email: "",
+        password: ""
+    })
+
     const handleLogin = () => {
         login(isAdmin)
     }
+
+    const onUpdateFormField = (e: any) => setUser({
+        ...userInfo,
+        [e.target.name]: e.target.value
+    })
+
     return (
         <React.Fragment>
             <Paper elevation={3}
@@ -38,10 +49,21 @@ const Home: React.FC<HomeProps> = (props) => {
                 >
                     <h1>Welcome to Employee System</h1>
                     <div>
-                        <TextField id="outlined-basic" label="Email" variant="outlined" />
+                        <TextField
+                            name='email'
+                            value={userInfo.email}
+                            onChange={onUpdateFormField}
+                            className="textfield-user-reg"
+                            helperText
+                            id="outlined-basic"
+                            label="Email"
+                            variant="outlined" />
                     </div>
                     <div style={{ marginTop: 10 }}>
-                        <TextField id="outlined-basic" label="Password" variant="outlined" />
+                        <TextField
+                            name='password'
+                            value={userInfo.password}
+                            onChange={onUpdateFormField} id="outlined-basic" label="Password" variant="outlined" />
                     </div>
                     <Button style={{ marginTop: 10, marginBottom: 20 }} variant="contained">Login</Button>
                 </Box>
