@@ -31,8 +31,8 @@ const App: React.FC<AppProps> = (props) => {
                     {/* add route that i want to protect here */}
                     <Route element={<PrivateRoute />}>
                         <Route path="/admin" element={<AdminPage />} />
+                        <Route path="/standard" element={<Standard />} />
                     </Route>
-                    <Route path="/standard" element={<Standard />} />
                     <Route path="/nopermission" element={<NoPermissionPage />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>

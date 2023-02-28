@@ -5,21 +5,24 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { LoginContext } from '../contexts/LoginContext';
 import { toggleLogin } from '../utils/toggleLogin';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const ButtonAppBar = () => {
     const { isLoggedIn, loading, setLoading, setIsLoggedIn } = React.useContext(LoginContext);
+    const navigate = useNavigate();
 
     const onLogout = async () => {
         if (setLoading) setLoading(true);
         try {
             await toggleLogin();
-            if (setIsLoggedIn) setIsLoggedIn(false);
+            if (setIsLoggedIn) {
+                setIsLoggedIn(false);
+                navigate('/login');
+            }
         } catch (err) {
             if (setLoading) setLoading(false);
         }

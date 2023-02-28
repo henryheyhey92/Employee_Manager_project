@@ -33,7 +33,19 @@ const Home: React.FC<HomeProps> = (props) => {
                         borderRadius: 1
                     }}
                 >
-                    <h1>Home page</h1>
+                    <h1>Welcome to the GIC's e-services</h1>
+                    <p>
+                        This is application build for <strong>Front end technical test assessment</strong>
+                    </p>
+                    <p>
+                        There are two types of account ; <strong>Admin and Standard</strong>
+                    </p>
+                    <p>
+                        <strong>Username:</strong> Admin, <strong>Password:</strong> admin123
+                    </p>
+                    <p>
+                        <strong>Username:</strong> Standard, <strong>Password:</strong> standard123
+                    </p>
                 </Box>
             </Paper>
         </React.Fragment>
