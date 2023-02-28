@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 
 interface EmployeeDetailsProps {
     setEmployeeData: React.Dispatch<
@@ -31,38 +30,42 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({ employeeData, setEmpl
                 <Grid container>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            {employeeData.firstName}
+                            <div style={{ display: 'block' }}>First Name : {employeeData.firstName}</div>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            {employeeData.lastName}
+                            <div style={{ display: 'block' }}>Last Name : {employeeData.lastName}</div>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            {employeeData.email}
+                            <div style={{ display: 'block' }}>Email : {employeeData.email}</div>
                         </Typography>
                     </Grid>
                 </Grid>
                 <Grid container>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            {employeeData.phoneNumber}
+                            <div style={{ display: 'block' }}>Phone nunmber : {employeeData.phoneNumber}</div>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            {employeeData.gender}
+                            <div style={{ display: 'block' }}>Gender : {employeeData.gender}</div>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            {employeeData.joinDate}
+                            <div style={{ display: 'block' }}>Join Date : {employeeData.joinDate}</div>
                         </Typography>
                     </Grid>
                 </Grid>
-                <Button variant="contained">Edit</Button>
+                <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                    <Button style={{ marginTop: 5 }} variant="contained">
+                        Edit
+                    </Button>
+                </Box>
             </CardContent>
         </Card>
     );
