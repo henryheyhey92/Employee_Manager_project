@@ -5,6 +5,8 @@ type ContextProps = {
     setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
     loading: boolean;
     setLoading: Dispatch<SetStateAction<boolean>>;
+    isNotValid: boolean;
+    setIsNotValid: Dispatch<SetStateAction<boolean>>;
 };
 
 export const LoginContext = React.createContext<Partial<ContextProps>>({});

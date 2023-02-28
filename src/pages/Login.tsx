@@ -5,20 +5,30 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { toggleLogin } from '../utils/toggleLogin';
 import { LoginContext } from '../contexts/LoginContext';
+import { adminDetails, standardDetails } from '../Constant/constants';
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn } = React.useContext(LoginContext);
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
 
     const onLogin = async () => {
         if (setLoading) {
             setLoading(true);
         }
+        if (setIsNotValid) setIsNotValid(false);
 
         try {
             await toggleLogin();
-            if (setIsLoggedIn) setIsLoggedIn(true);
+            if (userInfo.email === adminDetails.email && userInfo.password === adminDetails.password) {
+                // set the isAdmin state to true
+                if (setIsLoggedIn) setIsLoggedIn(true);
+            } else if (userInfo.email === standardDetails.email && userInfo.password === standardDetails.password) {
+                // set the is standard state to true
+                if (setIsLoggedIn) setIsLoggedIn(true);
+            } else {
+                if (setIsNotValid) setIsNotValid(true);
+            }
         } catch (err) {
             if (setLoading) setLoading(false);
         }
@@ -36,18 +46,16 @@ const Login: React.FC<LoginProps> = () => {
             [e.target.name]: e.target.value
         });
 
-    // const handleLoginInfo = () => {
+    // const handleLoginInfo = async () => {
     //     if (userInfo.email === adminDetails.email && userInfo.password === adminDetails.password) {
     //         // set the isAdmin state to true
+    //     } else if (userInfo.email === standardDetails.email && userInfo.password === standardDetails.password) {
+    //         // set the is standard state to true
     //     } else {
-    //         // redirect to other route
-    //         return;
+
     //     }
     // };
 
-    // if (isLoggedIn) {
-    //     return navigate(from);
-    // } else {
     return (
         <React.Fragment>
             <Paper
@@ -75,29 +83,28 @@ const Login: React.FC<LoginProps> = () => {
                     <div>
                         <TextField
                             type="email"
-                            placeholder="john.doe@mail.com"
-                            value="john.doe@mail.com"
                             name="email"
-                            // value={userInfo.email}
+                            value={userInfo.email}
                             onChange={onUpdateFormField}
                             className="textfield-user-reg"
-                            helperText
                             id="outlined-basic"
                             label="Email"
                             variant="outlined"
+                            error={isNotValid}
+                            helperText={isNotValid ? 'wrong email or password' : ''}
                         />
                     </div>
                     <div style={{ marginTop: 10 }}>
                         <TextField
                             type="password"
-                            placeholder="secret"
-                            value="secret"
                             name="password"
-                            // value={userInfo.password}
+                            value={userInfo.password}
                             onChange={onUpdateFormField}
                             id="outlined-basic"
                             label="Password"
                             variant="outlined"
+                            error={isNotValid}
+                            helperText={isNotValid ? 'wrong email or password' : ''}
                         />
                     </div>
                     <Button onClick={onLogin} style={{ marginTop: 10, marginBottom: 20 }} variant="contained">

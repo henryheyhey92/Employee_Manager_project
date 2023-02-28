@@ -14,6 +14,7 @@ interface AppProps {}
 const App: React.FC<AppProps> = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isNotValid, setIsNotValid] = useState(false);
 
     return (
         <LoginContext.Provider
@@ -21,7 +22,9 @@ const App: React.FC<AppProps> = (props) => {
                 isLoggedIn,
                 setIsLoggedIn,
                 loading,
-                setLoading
+                setLoading,
+                isNotValid,
+                setIsNotValid
             }}
         >
             <Router>

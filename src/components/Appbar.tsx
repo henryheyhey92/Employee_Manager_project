@@ -12,7 +12,7 @@ import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const ButtonAppBar = () => {
-    const { isLoggedIn, loading, setLoading, setIsLoggedIn } = React.useContext(LoginContext);
+    const { isLoggedIn, loading, setLoading, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
     const navigate = useNavigate();
 
     const onLogout = async () => {
