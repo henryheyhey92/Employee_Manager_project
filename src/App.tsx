@@ -8,6 +8,8 @@ import NoPermissionPage from './pages/NoPermissionPage';
 import Appbar from './components/Appbar';
 import PrivateRoute from './components/PrivateRoute';
 import { LoginContext } from './contexts/LoginContext';
+import LeftNavPanel from './components/LeftNavPanel';
+import { Box } from '@mui/system';
 
 interface AppProps {}
 
@@ -28,17 +30,22 @@ const App: React.FC<AppProps> = (props) => {
             }}
         >
             <Router>
-                <Appbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    {/* add route that i want to protect here */}
-                    <Route element={<PrivateRoute />}>
-                        <Route path="/admin" element={<AdminPage />} />
-                        <Route path="/standard" element={<Standard />} />
-                    </Route>
-                    <Route path="/nopermission" element={<NoPermissionPage />} />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
+                <Box sx={{ display: 'flex' }}>
+                    <Appbar />
+                    <LeftNavPanel />
+                    <Box component="main" sx={{ flexGrow: 1, m: 10 }}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            {/* add route that i want to protect here */}
+                            <Route element={<PrivateRoute />}>
+                                <Route path="/admin" element={<AdminPage />} />
+                                <Route path="/standard" element={<Standard />} />
+                            </Route>
+                            <Route path="/nopermission" element={<NoPermissionPage />} />
+                            <Route path="/login" element={<Login />} />
+                        </Routes>
+                    </Box>
+                </Box>
             </Router>
         </LoginContext.Provider>
     );
