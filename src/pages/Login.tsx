@@ -6,11 +6,13 @@ import Button from '@mui/material/Button';
 import { toggleLogin } from '../utils/toggleLogin';
 import { LoginContext } from '../contexts/LoginContext';
 import { adminDetails, standardDetails } from '../Constant/constants';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
     const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
+    const navigate = useNavigate();
 
     const onLogin = async () => {
         if (setLoading) {
@@ -22,10 +24,16 @@ const Login: React.FC<LoginProps> = () => {
             await toggleLogin();
             if (userInfo.email === adminDetails.email && userInfo.password === adminDetails.password) {
                 // set the isAdmin state to true
-                if (setIsLoggedIn) setIsLoggedIn(true);
+                if (setIsLoggedIn) {
+                    setIsLoggedIn(true);
+                    navigate('/home');
+                }
             } else if (userInfo.email === standardDetails.email && userInfo.password === standardDetails.password) {
                 // set the is standard state to true
-                if (setIsLoggedIn) setIsLoggedIn(true);
+                if (setIsLoggedIn) {
+                    setIsLoggedIn(true);
+                    navigate('/home');
+                }
             } else {
                 if (setIsNotValid) setIsNotValid(true);
             }
