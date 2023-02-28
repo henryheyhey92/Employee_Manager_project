@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AdminPage from './pages/Admin';
-import Standard from './pages/Standard';
 import About from './pages/About';
 import Login from './pages/Login';
 import NoPermissionPage from './pages/NoPermissionPage';
@@ -11,8 +9,7 @@ import { LoginContext } from './contexts/LoginContext';
 import LeftNavPanel from './components/LeftNavPanel';
 import { Box } from '@mui/system';
 import Contact from './pages/Contact';
-import Home from '@mui/icons-material/Home';
-
+import Home from './pages/Home';
 interface AppProps {}
 
 const App: React.FC<AppProps> = (props) => {
@@ -41,8 +38,6 @@ const App: React.FC<AppProps> = (props) => {
                             {/* add route that i want to protect here */}
                             <Route element={<PrivateRoute />}>
                                 <Route path="/home" element={<Home />} />
-                                <Route path="/admin" element={<AdminPage />} />
-                                <Route path="/standard" element={<Standard />} />
                             </Route>
                             <Route path="/nopermission" element={<NoPermissionPage />} />
                             <Route path="/login" element={<Login />} />

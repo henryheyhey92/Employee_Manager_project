@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
-    return <div>Home</div>;
+    return <div>this is home page</div>;
 };
 
 export default Home;
