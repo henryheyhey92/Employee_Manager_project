@@ -6,7 +6,7 @@ import { LoginContext } from '../contexts/LoginContext';
 const PrivateRoute = () => {
     const { isLoggedIn } = React.useContext(LoginContext);
 
-    return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+    return isLoggedIn ? <Outlet /> : <Navigate to="/nopermission" />;
 };
 
 export default PrivateRoute;

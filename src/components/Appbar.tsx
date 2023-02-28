@@ -1,5 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -9,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { LoginContext } from '../contexts/LoginContext';
 import { toggleLogin } from '../utils/toggleLogin';
 import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 const ButtonAppBar = () => {
     const { isLoggedIn, loading, setLoading, setIsLoggedIn } = React.useContext(LoginContext);
@@ -25,32 +27,57 @@ const ButtonAppBar = () => {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <AppBar position="static">
+            <Container maxWidth="xl">
                 <Toolbar>
-                    <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Link to="/">Home</Link>
-                    <Link to="/admin">Admin</Link>
-                    <Link to="/standard">
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Standard
-                        </Typography>
-                    </Link>
-
-                    {!isLoggedIn ? (
-                        // <Link to="/login">
-                        <Button color="inherit">Login</Button>
-                    ) : (
-                        // </Link>
-                        <Button color="inherit" onClick={() => onLogout()}>
-                            Logout
-                        </Button>
-                    )}
+                    <Grid container>
+                        <Grid item xs={5}>
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    component="a"
+                                    href="/"
+                                    sx={{
+                                        mr: 2,
+                                        display: { xs: 'none', md: 'flex' },
+                                        fontFamily: 'monospace',
+                                        fontWeight: 700,
+                                        letterSpacing: '.3rem',
+                                        color: 'inherit',
+                                        textDecoration: 'none'
+                                    }}
+                                >
+                                    E-GIC
+                                </Typography>
+                                <Button color="inherit" component={Link} to="/">
+                                    Home
+                                </Button>
+                                <Button color="inherit" component={Link} to="/admin">
+                                    Admin
+                                </Button>
+                                <Button color="inherit" component={Link} to="/standard">
+                                    Standard
+                                </Button>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={6}></Grid>
+                        <Grid item xs={1}>
+                            {!isLoggedIn ? (
+                                <Button color="inherit" component={Link} to="/login">
+                                    Login
+                                </Button>
+                            ) : (
+                                // </Link>
+                                <Button color="inherit" onClick={() => onLogout()}>
+                                    Logout
+                                </Button>
+                            )}
+                        </Grid>
+                    </Grid>
                 </Toolbar>
-            </AppBar>
-        </Box>
+            </Container>
+        </AppBar>
     );
 };
 
