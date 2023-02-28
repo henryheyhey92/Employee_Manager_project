@@ -53,27 +53,50 @@ const ButtonAppBar = () => {
                                 >
                                     E-GIC
                                 </Typography>
-                                <Button color="inherit" component={Link} to="/">
-                                    Home
-                                </Button>
-                                <Button color="inherit" component={Link} to="/admin">
-                                    Admin
-                                </Button>
-                                <Button color="inherit" component={Link} to="/standard">
-                                    Standard
-                                </Button>
                             </Box>
                         </Grid>
                         <Grid item xs={6}></Grid>
                         <Grid item xs={1}>
                             {!isLoggedIn ? (
                                 <Button color="inherit" component={Link} to="/login">
-                                    Login
+                                    <Typography
+                                        variant="h6"
+                                        noWrap
+                                        component="a"
+                                        href="/"
+                                        sx={{
+                                            mr: 2,
+                                            display: { xs: 'none', md: 'flex' },
+                                            fontFamily: 'monospace',
+                                            fontWeight: 700,
+                                            letterSpacing: '.3rem',
+                                            color: 'inherit',
+                                            textDecoration: 'none'
+                                        }}
+                                    >
+                                        Login
+                                    </Typography>
                                 </Button>
                             ) : (
                                 // </Link>
                                 <Button color="inherit" onClick={() => onLogout()}>
-                                    Logout
+                                    <Typography
+                                        variant="h6"
+                                        noWrap
+                                        component="a"
+                                        href="/"
+                                        sx={{
+                                            mr: 2,
+                                            display: { xs: 'none', md: 'flex' },
+                                            fontFamily: 'monospace',
+                                            fontWeight: 700,
+                                            letterSpacing: '.3rem',
+                                            color: 'inherit',
+                                            textDecoration: 'none'
+                                        }}
+                                    >
+                                        Logout
+                                    </Typography>
                                 </Button>
                             )}
                         </Grid>

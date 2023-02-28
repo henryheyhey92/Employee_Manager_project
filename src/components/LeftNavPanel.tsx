@@ -15,6 +15,9 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+import LoginIcon from '@mui/icons-material/Login';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 const drawerWidth = 240;
 
@@ -36,21 +39,27 @@ export default function ClippedDrawer() {
                 <List>
                     <ListItemButton component={Link} to="/">
                         <ListItemIcon>
+                            <InfoIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="About" />
+                    </ListItemButton>
+                    <ListItemButton component={Link} to="/home">
+                        <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary="Home" />
                     </ListItemButton>
-                    <ListItemButton component={Link} to="/admin">
+                    <ListItemButton component={Link} to="/contact">
                         <ListItemIcon>
-                            <AdminPanelSettingsIcon />
+                            <ContactSupportIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Admin" />
+                        <ListItemText primary="Contact us" />
                     </ListItemButton>
-                    <ListItemButton component={Link} to="/standard">
+                    <ListItemButton component={Link} to="/login">
                         <ListItemIcon>
-                            <PersonIcon />
+                            <LoginIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Standard" />
+                        <ListItemText primary="Login" />
                     </ListItemButton>
                 </List>
             </Box>
