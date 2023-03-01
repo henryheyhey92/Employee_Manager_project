@@ -8,31 +8,41 @@ import AddIcon from '@mui/icons-material/Add';
 import { Grid } from '@mui/material';
 import axios from 'axios';
 import { Employee } from '../Constant/constants';
+import EmployeeForm from '../components/EmployeeForm';
 interface HomeProps {}
 
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData } = React.useContext(LoginContext);
-    {
-        console.log('🚀 ~ file: Home.tsx:32 ~ {employeeData?.map ~ employeeData:', employeeData);
-    }
+
+    const [newEmployee, setNewEmployee] = useState(false);
+
+    const handleAddEmployee = () => {
+        setNewEmployee(true);
+    };
+
     return (
         <React.Fragment>
-            <Grid container>
-                <Grid item xs={5}>
-                    <h1>The employee information</h1>
-                </Grid>
-                <Grid item xs={6}></Grid>
-                <Grid item xs={1}>
-                    <Fab color="primary" aria-label="add">
-                        <AddIcon />
-                    </Fab>
-                </Grid>
-            </Grid>
-            <div>
-                {employeeData?.map((element: Employee, index: any) => {
-                    return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} />;
-                })}
-            </div>
+            {!newEmployee && (
+                <>
+                    <Grid container>
+                        <Grid item xs={5}>
+                            <h1>The employee information</h1>
+                        </Grid>
+                        <Grid item xs={6}></Grid>
+                        <Grid item xs={1}>
+                            <Fab color="primary" aria-label="add" onClick={handleAddEmployee}>
+                                <AddIcon />
+                            </Fab>
+                        </Grid>
+                    </Grid>
+                    <div>
+                        {employeeData?.map((element: Employee, index: any) => {
+                            return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} />;
+                        })}
+                    </div>
+                </>
+            )}
+            {newEmployee && <EmployeeForm />}
         </React.Fragment>
     );
 };

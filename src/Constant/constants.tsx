@@ -11,7 +11,6 @@ export const standardDetails = {
 };
 
 export type Employee = {
-    id: number;
     firstName: string;
     lastName: string;
     email: string;

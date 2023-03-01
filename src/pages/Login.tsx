@@ -54,16 +54,6 @@ const Login: React.FC<LoginProps> = () => {
             [e.target.name]: e.target.value
         });
 
-    // const handleLoginInfo = async () => {
-    //     if (userInfo.email === adminDetails.email && userInfo.password === adminDetails.password) {
-    //         // set the isAdmin state to true
-    //     } else if (userInfo.email === standardDetails.email && userInfo.password === standardDetails.password) {
-    //         // set the is standard state to true
-    //     } else {
-
-    //     }
-    // };
-
     return (
         <React.Fragment>
             <Paper
