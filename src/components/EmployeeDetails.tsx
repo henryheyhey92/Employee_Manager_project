@@ -5,25 +5,17 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Employee } from '../Constant/constants';
 
 interface EmployeeDetailsProps {
-    setEmployeeData: React.Dispatch<
-        React.SetStateAction<
-            {
-                id: number;
-                firstName: string;
-                lastName: string;
-                email: string;
-                phoneNumber: string;
-                gender: string;
-                joinDate: string;
-            }[]
-        >
-    >;
-    employeeData: any | string | number;
+    employeeData: any;
+    setEmployeeData: React.Dispatch<React.SetStateAction<Employee[]>> | any;
 }
 
-const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({ employeeData, setEmployeeData }: EmployeeDetailsProps) => {
+const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsProps) => {
+    const handleEdit = () => {};
+    const { employeeData, setEmployeeData } = props;
+
     return (
         <Card sx={{ width: 'auto', m: 5 }}>
             <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
@@ -62,7 +54,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = ({ employeeData, setEmpl
                     </Grid>
                 </Grid>
                 <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                    <Button style={{ marginTop: 5 }} variant="contained">
+                    <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
                         Edit
                     </Button>
                 </Box>

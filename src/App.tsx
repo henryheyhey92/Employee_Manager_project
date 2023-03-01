@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Login from './pages/Login';
@@ -10,12 +10,27 @@ import LeftNavPanel from './components/LeftNavPanel';
 import { Box } from '@mui/system';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import { BASE_URL } from './Constant/constants';
+import axios from 'axios';
+import { Employee } from './Constant/constants';
+
 interface AppProps {}
 
 const App: React.FC<AppProps> = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isNotValid, setIsNotValid] = useState(false);
+    const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let response = await axios.get(BASE_URL + 'api/persondata');
+            if (response) {
+                setEmployeeData(response.data.employee_data);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <LoginContext.Provider
@@ -25,7 +40,9 @@ const App: React.FC<AppProps> = (props) => {
                 loading,
                 setLoading,
                 isNotValid,
-                setIsNotValid
+                setIsNotValid,
+                employeeData,
+                setEmployeeData
             }}
         >
             <Router>

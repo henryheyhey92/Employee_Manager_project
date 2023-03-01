@@ -1,25 +1,31 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 
 export const adminDetails = {
-    email: "admin@gmail.com",
-    password: "admin1234"
-}
+    email: 'admin@gmail.com',
+    password: 'admin1234'
+};
 
 export const standardDetails = {
-    email: "standard@gmail.com",
-    password: "standard1234"
-}
+    email: 'standard@gmail.com',
+    password: 'standard1234'
+};
 
-interface constantsProps {
+export type Employee = {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    gender: string;
+    joinDate: string;
+};
 
-}
+export const BASE_URL = 'http://localhost:5000/';
+
+interface constantsProps {}
 
 const constants: React.FC<constantsProps> = (props) => {
-    return (
-        <div>
-            constants
-        </div>
-    )
-}
+    return <div>constants</div>;
+};
 
 export default constants;

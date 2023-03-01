@@ -1,55 +1,35 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { LoginContext } from '../contexts/LoginContext';
 import EmployeeDetails from '../components/EmployeeDetails';
+import { Box } from '@mui/system';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import { Grid } from '@mui/material';
+import axios from 'axios';
+import { Employee } from '../Constant/constants';
 interface HomeProps {}
 
-const Home: React.FC<HomeProps> = (props) => {
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
-    const [employeeData, setEmployeeData] = useState([
-        {
-            id: 1,
-            firstName: 'Harry',
-            lastName: 'Lim',
-            email: 'harry@email.com',
-            phoneNumber: '90909090',
-            gender: 'male',
-            joinDate: '01/01/2020'
-        },
-        {
-            id: 2,
-            firstName: 'Larry',
-            lastName: 'Lim',
-            email: 'Larry@email.com',
-            phoneNumber: '90909999',
-            gender: 'male',
-            joinDate: '01/02/2021'
-        },
-        {
-            id: 3,
-            firstName: 'Marry',
-            lastName: 'Lee',
-            email: 'Marry@email.com',
-            phoneNumber: '95559090',
-            gender: 'female',
-            joinDate: '01/01/2019'
-        },
-        {
-            id: 4,
-            firstName: 'Gary',
-            lastName: 'Wu',
-            email: 'Garry@email.com',
-            phoneNumber: '90456790',
-            gender: 'male',
-            joinDate: '01/01/2019'
-        }
-    ]);
-
+const Home: React.FC<HomeProps> = () => {
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData } = React.useContext(LoginContext);
+    {
+        console.log('🚀 ~ file: Home.tsx:32 ~ {employeeData?.map ~ employeeData:', employeeData);
+    }
     return (
         <React.Fragment>
-            <h1>The employee information</h1>
+            <Grid container>
+                <Grid item xs={5}>
+                    <h1>The employee information</h1>
+                </Grid>
+                <Grid item xs={6}></Grid>
+                <Grid item xs={1}>
+                    <Fab color="primary" aria-label="add">
+                        <AddIcon />
+                    </Fab>
+                </Grid>
+            </Grid>
             <div>
-                {employeeData?.map((element, index) => {
+                {employeeData?.map((element: Employee, index: any) => {
                     return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} />;
                 })}
             </div>
