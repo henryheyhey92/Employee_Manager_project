@@ -3,13 +3,20 @@ import { Box, Paper, TextField, Grid, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface EmployeeFormProps {}
+interface EmployeeFormProps {
+    closeForm: any;
+}
 
-const EmployeeForm: React.FC<EmployeeFormProps> = (props) => {
+const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => {
+    const { closeForm } = props;
+    const handleClose = () => {
+        closeForm(true);
+    };
+
     return (
         <Box sx={{ flexGrow: 1, mt: 3 }}>
             <div style={{ display: 'flex', flexDirection: 'row-reverse', marginBottom: 20 }}>
-                <CloseIcon fontSize="large" />
+                <CloseIcon fontSize="large" onClick={handleClose} />
             </div>
             <Grid container spacing={2}>
                 <Grid item xs={4}>

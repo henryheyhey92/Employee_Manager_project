@@ -20,6 +20,12 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         setNewEmployee(true);
     };
 
+    const handleCloseForm = (confirm: boolean) => {
+        if (confirm) {
+            setNewEmployee(false);
+        }
+    };
+
     return (
         <React.Fragment>
             {!newEmployee && (
@@ -42,7 +48,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     </div>
                 </>
             )}
-            {newEmployee && <EmployeeForm />}
+            {newEmployee && <EmployeeForm closeForm={handleCloseForm} />}
         </React.Fragment>
     );
 };
