@@ -1,17 +1,43 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import { Box, Paper, TextField, Grid, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
+import { Employee } from '../Constant/constants';
+import { LoginContext } from '../contexts/LoginContext';
 
 interface EmployeeFormProps {
     closeForm: any;
+    addNewEmployee: any;
 }
 
+const initialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    gender: '',
+    joinDate: ''
+};
+
 const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => {
-    const { closeForm } = props;
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData } = React.useContext(LoginContext);
+
+    const [addEmployee, setEmployee] = useState(initialState);
+    const { closeForm, addNewEmployee } = props;
     const handleClose = () => {
+        setEmployee(initialState);
         closeForm(true);
     };
+
+    const handleSubmit = () => {
+        addNewEmployee(addEmployee);
+    };
+
+    const onUpdateFormField = (e: any) =>
+        setEmployee({
+            ...addEmployee,
+            [e.target.name]: e.target.value
+        });
 
     return (
         <Box sx={{ flexGrow: 1, mt: 3 }}>
@@ -26,8 +52,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="firstName"
                         variant="outlined"
                         name="firstName"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.firstName}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -40,8 +66,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="lastName"
                         variant="outlined"
                         name="lastName"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.lastName}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -54,8 +80,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="email"
                         variant="outlined"
                         name="email"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.email}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -68,8 +94,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="phoneNumber"
                         variant="outlined"
                         name="phoneNumber"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.phoneNumber}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -82,8 +108,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="gender"
                         variant="outlined"
                         name="gender"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.gender}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -96,8 +122,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                         label="joinDate"
                         variant="outlined"
                         name="joinDate"
-                        // value={props.imageLink}
-                        // onChange={props.updateFormField}
+                        value={addEmployee.joinDate}
+                        onChange={onUpdateFormField}
                         // className="textfield-image-url"
                         // error={!props.errorForm.img[0]}
                         // helperText={props.errorForm.img[1]}
@@ -105,7 +131,9 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => 
                 </Grid>
             </Grid>
             <div style={{ display: 'flex', flexDirection: 'row-reverse', marginTop: 20 }}>
-                <Button variant="contained">Submit</Button>
+                <Button variant="contained" onClick={handleSubmit}>
+                    Submit
+                </Button>
             </div>
         </Box>
     );

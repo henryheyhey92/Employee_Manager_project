@@ -8,7 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Employee } from '../Constant/constants';
 
 interface EmployeeDetailsProps {
-    employeeData: any;
+    employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[]>> | any;
 }
 
@@ -22,7 +22,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                 <Grid container>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            <div style={{ display: 'block' }}>First Name : {employeeData.firstName}</div>
+                            <div style={{ display: 'block' }}>First Name : {employeeData?.firstName}</div>
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>

@@ -8,8 +8,8 @@ type ContextProps = {
     setLoading: Dispatch<SetStateAction<boolean>>;
     isNotValid: boolean;
     setIsNotValid: Dispatch<SetStateAction<boolean>>;
-    employeeData: Employee[];
-    setEmployeeData: Dispatch<React.SetStateAction<Employee[]>>;
+    employeeData: Employee[] | any;
+    setEmployeeData: Dispatch<React.SetStateAction<Employee[] | any>>;
 };
 
 export const LoginContext = React.createContext<Partial<ContextProps>>({});

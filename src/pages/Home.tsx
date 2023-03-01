@@ -9,10 +9,15 @@ import { Grid } from '@mui/material';
 import axios from 'axios';
 import { Employee } from '../Constant/constants';
 import EmployeeForm from '../components/EmployeeForm';
-interface HomeProps {}
+interface HomeProps {
+    employeeData: Employee[] | any;
+    setEmployeeData: React.Dispatch<React.SetStateAction<Employee[] | any>>;
+    passEmployeeData: Employee[] | any;
+}
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData } = React.useContext(LoginContext);
+    const { employeeData, setEmployeeData, passEmployeeData } = props;
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
 
     const [newEmployee, setNewEmployee] = useState(false);
 
@@ -24,6 +29,14 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         if (confirm) {
             setNewEmployee(false);
         }
+    };
+
+    const updateEmployeeList = (data: any) => {
+        console.log('This is data', data);
+        employeeData?.unshift(data);
+        setEmployeeData(employeeData);
+        passEmployeeData(employeeData);
+        setNewEmployee(false);
     };
 
     return (
@@ -48,7 +61,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     </div>
                 </>
             )}
-            {newEmployee && <EmployeeForm closeForm={handleCloseForm} />}
+            {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />}
         </React.Fragment>
     );
 };

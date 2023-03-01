@@ -20,7 +20,8 @@ const App: React.FC<AppProps> = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isNotValid, setIsNotValid] = useState(false);
-    const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+    const [employeeData, setEmployeeData] = useState<Employee[] | any>([]);
+    const [tempState, setTempState] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +31,11 @@ const App: React.FC<AppProps> = (props) => {
             }
         };
         fetchData();
-    }, []);
+    }, [tempState]);
+
+    const passEmployeeData = (data: Employee[] | any) => {
+        setEmployeeData(data);
+    };
 
     return (
         <LoginContext.Provider
@@ -54,7 +59,7 @@ const App: React.FC<AppProps> = (props) => {
                             <Route path="/" element={<About />} />
                             {/* add route that i want to protect here */}
                             <Route element={<PrivateRoute />}>
-                                <Route path="/home" element={<Home />} />
+                                <Route path="/home" element={<Home employeeData={employeeData} setEmployeeData={setEmployeeData} passEmployeeData={passEmployeeData} />} />
                             </Route>
                             <Route path="/nopermission" element={<NoPermissionPage />} />
                             <Route path="/login" element={<Login />} />
