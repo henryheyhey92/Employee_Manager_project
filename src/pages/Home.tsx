@@ -36,7 +36,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     };
 
     const updateEmployeeList = async (data: any) => {
-        console.log('This is data', data);
         employeeData?.unshift(data);
         setEmployeeData(employeeData);
         let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
@@ -62,7 +61,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
     return (
         <React.Fragment>
-            {!newEmployee && (
+            {
                 <>
                     <Grid container>
                         <Grid item xs={5}>
@@ -70,7 +69,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                         </Grid>
                         <Grid item xs={6}></Grid>
                         <Grid item xs={1}>
-                            <Fab color="primary" aria-label="add" onClick={handleAddEmployee}>
+                            <Fab color="primary" aria-label="add" onClick={handleClickListItem}>
                                 <AddIcon />
                             </Fab>
                         </Grid>
@@ -81,9 +80,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                         })}
                     </div>
                 </>
-            )}
-            {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />}
-            {/* {newEmployee && <EmployeeFormDialog id="ringtone-menu" keepMounted open={open} onClose={handleClose} value={value} />} */}
+            }
+            {/* {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />} */}
+            {<EmployeeFormDialog id="ringtone-menu" keepMounted open={open} onClose={handleClose} value={value} />}
         </React.Fragment>
     );
 };
