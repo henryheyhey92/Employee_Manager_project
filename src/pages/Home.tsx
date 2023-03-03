@@ -9,6 +9,8 @@ import { Grid } from '@mui/material';
 import axios from 'axios';
 import { Employee } from '../Constant/constants';
 import EmployeeForm from '../components/EmployeeForm';
+import { BASE_URL } from '../Constant/constants';
+import EmployeeFormDialog from '../components/EmployeeFormDialog';
 interface HomeProps {
     employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[] | any>>;
@@ -18,6 +20,8 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const { employeeData, setEmployeeData, passEmployeeData } = props;
     const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
+
+    useEffect(() => {}, []);
 
     const [newEmployee, setNewEmployee] = useState(false);
 
@@ -31,12 +35,29 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
 
-    const updateEmployeeList = (data: any) => {
+    const updateEmployeeList = async (data: any) => {
         console.log('This is data', data);
         employeeData?.unshift(data);
         setEmployeeData(employeeData);
-        passEmployeeData(employeeData);
+        let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
+        console.log('What is the response :', response);
         setNewEmployee(false);
+    };
+
+    //
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState('Dione');
+
+    const handleClickListItem = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (newValue?: string) => {
+        setOpen(false);
+
+        if (newValue) {
+            setValue(newValue);
+        }
     };
 
     return (
@@ -62,6 +83,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                 </>
             )}
             {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />}
+            {/* {newEmployee && <EmployeeFormDialog id="ringtone-menu" keepMounted open={open} onClose={handleClose} value={value} />} */}
         </React.Fragment>
     );
 };

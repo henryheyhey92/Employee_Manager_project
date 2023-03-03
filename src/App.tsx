@@ -21,7 +21,6 @@ const App: React.FC<AppProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const [isNotValid, setIsNotValid] = useState(false);
     const [employeeData, setEmployeeData] = useState<Employee[] | any>([]);
-    const [tempState, setTempState] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +30,7 @@ const App: React.FC<AppProps> = (props) => {
             }
         };
         fetchData();
-    }, [tempState]);
+    }, []);
 
     const passEmployeeData = (data: Employee[] | any) => {
         setEmployeeData(data);
