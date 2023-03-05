@@ -19,6 +19,15 @@ export type Employee = {
     joinDate: string;
 };
 
+export const InitialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    gender: '',
+    joinDate: ''
+};
+
 export const BASE_URL = 'http://localhost:5000/';
 
 interface constantsProps {}

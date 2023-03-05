@@ -82,7 +82,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                 </>
             }
             {/* {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />} */}
-            {<EmployeeFormDialog id="ringtone-menu" keepMounted open={open} onClose={handleClose} value={value} />}
+            {<EmployeeFormDialog addNewEmployee={updateEmployeeList} id="addNewEmployee" keepMounted open={open} onClose={handleClose} value={value} />}
         </React.Fragment>
     );
 };
