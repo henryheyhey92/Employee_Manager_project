@@ -13,6 +13,16 @@ import Button from '@mui/material/Button';
 import { TextField, Grid } from '@mui/material';
 import { Employee } from '../Constant/constants';
 import { InitialState } from '../Constant/constants';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import dayjs, { Dayjs } from 'dayjs';
+import Stack from '@mui/material/Stack';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 interface EmployeeFormDialogProps {
     addNewEmployee: any;
@@ -61,6 +71,20 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
         });
     };
 
+    const [dateValue, setdateValue] = React.useState<Dayjs | null>(dayjs('2014-08-18T21:11:54'));
+
+    const handleChange = (newValue: Dayjs | any) => {
+        setdateValue(newValue);
+        const date = new Date(newValue);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        const result = `${day}/${month}/${year}`;
+        addEmployee.joinDate = result;
+        setEmployee({ ...addEmployee });
+    };
+
     return (
         <Dialog sx={{ '& .MuiDialog-paper': { width: '100%', height: '100%' } }} fullWidth={true} TransitionProps={{ onEntering: handleEntering }} open={open} {...other}>
             <DialogTitle>Phone Ringtone</DialogTitle>
@@ -96,7 +120,12 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
                         </FormControl>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth id="joinDate" label="Join Date" variant="outlined" name="joinDate" value={addEmployee.joinDate} onChange={onUpdateFormField} />
+                        {/* <TextField fullWidth id="joinDate" label="Join Date" variant="outlined" name="joinDate" value={addEmployee.joinDate} onChange={onUpdateFormField} /> */}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <Stack spacing={3}>
+                                <DatePicker label="Join Date" value={dateValue} onChange={handleChange} />
+                            </Stack>
+                        </LocalizationProvider>
                     </Grid>
                 </Grid>
             </DialogContent>
