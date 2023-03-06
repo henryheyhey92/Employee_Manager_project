@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,17 +12,11 @@ import Button from '@mui/material/Button';
 import { TextField, Grid } from '@mui/material';
 import { Employee } from '../Constant/constants';
 import { InitialState, ErrorState, ErrorType } from '../Constant/constants';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import dayjs, { Dayjs } from 'dayjs';
 import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { firstNameAndLastValidation, validateEmail, validatePhoneNumber } from '../validation/validation';
 import FormHelperText from '@mui/material/FormHelperText';
 
 interface EmployeeFormDialogProps {
@@ -39,6 +32,8 @@ interface EmployeeFormDialogProps {
     value: string;
     open: boolean;
     onClose: (value?: string) => void;
+    editEmployeeData: Employee[] | any;
+    dialogTitle: string;
 }
 
 const genderName = ['Male', 'Female', 'Other'];
@@ -48,15 +43,33 @@ const todayStartOfTheDay = today.startOf('day');
 const currentDate = new Date();
 
 const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFormDialogProps) => {
-    const { firstNameValError, lastNameValError, emailValError, phoneNumValError, genderInputError, joinDateInputError, addNewEmployee, onClose, value: valueProp, open, ...other } = props;
+    const {
+        dialogTitle,
+        editEmployeeData,
+        firstNameValError,
+        lastNameValError,
+        emailValError,
+        phoneNumValError,
+        genderInputError,
+        joinDateInputError,
+        addNewEmployee,
+        onClose,
+        value: valueProp,
+        open,
+        ...other
+    } = props;
     const [value, setValue] = React.useState(valueProp);
     const radioGroupRef = React.useRef<HTMLElement>(null);
     const [addEmployee, setEmployee] = useState(InitialState);
+    //dayjs('2014-08-18T21:11:54')
+    const [dateValue, setdateValue] = React.useState<Dayjs | null>(today);
 
     React.useEffect(() => {
         if (!open) {
             setValue(valueProp);
         }
+        setEmployee(editEmployeeData);
+        setdateValue(dayjs(editEmployeeData.joinDate));
     }, [valueProp, open]);
 
     const handleEntering = () => {
@@ -72,10 +85,11 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
     };
 
     const handleOk = () => {
-        addNewEmployee(addEmployee);
-        // onClose(value);
-        // setEmployee(InitialState);
-        // setdateValue(dayjs(''));
+        if (dialogTitle === 'Add Employee') {
+            addNewEmployee(addEmployee, 'Add');
+        } else if (dialogTitle === 'Edit Employee Details') {
+            addNewEmployee(addEmployee, 'Edit');
+        }
     };
 
     const onUpdateFormField = (e: any) => {
@@ -85,9 +99,6 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
         });
     };
 
-    //dayjs('2014-08-18T21:11:54')
-    const [dateValue, setdateValue] = React.useState<Dayjs | null>(today);
-
     const handleChange = (newValue: Dayjs | any) => {
         const date = new Date(newValue);
         const year = date.getFullYear();
@@ -96,12 +107,14 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
 
         const result = `${day}/${month}/${year}`;
         addEmployee.joinDate = result;
+        console.log('🚀 ~ file: EmployeeFormDialog.tsx:116 ~ handleChange ~ result:', result);
+        setdateValue(dayjs(result));
         setEmployee({ ...addEmployee });
     };
 
     return (
         <Dialog sx={{ '& .MuiDialog-paper': { width: '100%', height: '100%' } }} fullWidth={true} TransitionProps={{ onEntering: handleEntering }} open={open} {...other}>
-            <DialogTitle>Add Employee</DialogTitle>
+            <DialogTitle>{dialogTitle}</DialogTitle>
             <DialogContent dividers>
                 <Grid container spacing={1}>
                     <Grid item xs={12}>

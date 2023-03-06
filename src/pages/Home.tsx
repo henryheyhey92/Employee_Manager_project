@@ -13,6 +13,7 @@ import { BASE_URL } from '../Constant/constants';
 import EmployeeFormDialog from '../components/EmployeeFormDialog';
 import { firstNameAndLastValidation, validateEmail, validatePhoneNumber, validateGender, validateJoinDate } from '../validation/validation';
 import ConfirmationDialog from '../components/ConfirmationDialog';
+
 interface HomeProps {
     employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[] | any>>;
@@ -35,56 +36,83 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [confirmDialogValue, setConfirmDialogValue] = useState('Dione');
     const [removeIndex, setRemoveIndex] = useState<number>(0);
+    const [editIndex, setEditIndex] = useState<number>(0);
+    const [editEmployeeData, setEditEmployeeData] = useState<Employee[] | any>([]);
+    const [dialogTitle, setDialogTitle] = useState('Add Employee');
 
-    const updateEmployeeList = async (data: Employee) => {
+    const defaultValidState = (data: Employee) => {
         const { firstName, lastName, email, gender, phoneNumber, joinDate } = data;
-        setFirstNameValidation(false);
-        setLastNameValidation(false);
-        setEmailValidation(false);
-        setPhoneNumValidation(false);
-        setGenderValidation(false);
-        setJoinDateValidation(false);
-
         const isValidFirstName = firstNameAndLastValidation(firstName);
         const isValidLastName = firstNameAndLastValidation(lastName);
         const isValidEmail = validateEmail(email);
         const isValidPhoneNum = validatePhoneNumber(phoneNumber);
         const isValidGender = validateGender(gender);
         const isValidJoinDate = validateJoinDate(joinDate);
+        const obj = { isValidFirstName, isValidLastName, isValidEmail, isValidPhoneNum, isValidGender, isValidJoinDate };
+        return obj;
+    };
 
-        if (isValidFirstName && isValidLastName && isValidEmail && isValidPhoneNum && isValidJoinDate) {
-            employeeData?.unshift(data);
-            setEmployeeData(employeeData);
-            let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
-            if (response) {
-                setOpen(false);
-            }
+    const validationRefractorFunc = (isValidFirstName: boolean, isValidLastName: boolean, isValidEmail: boolean, isValidPhoneNum: boolean, isValidGender: boolean, isValidJoinDate: boolean) => {
+        if (!isValidFirstName) {
+            setFirstNameValidation(true);
+        }
+        if (!isValidLastName) {
+            setLastNameValidation(true);
+        }
+        if (!isValidEmail) {
+            setEmailValidation(true);
+        }
+        if (!isValidPhoneNum) {
+            setPhoneNumValidation(true);
+        }
+        if (!isValidGender) {
+            setGenderValidation(true);
+        }
+        if (!isValidPhoneNum) {
+            setJoinDateValidation(true);
+        }
+    };
 
-            //set validation to default state
-            setFirstNameValidation(false);
-            setLastNameValidation(false);
-            setEmailValidation(false);
-            setPhoneNumValidation(false);
-            setGenderValidation(false);
-            setJoinDateValidation(false);
-        } else {
-            if (!isValidFirstName) {
-                setFirstNameValidation(true);
+    const validationDefaultFunc = () => {
+        setFirstNameValidation(false);
+        setLastNameValidation(false);
+        setEmailValidation(false);
+        setPhoneNumValidation(false);
+        setGenderValidation(false);
+        setJoinDateValidation(false);
+    };
+
+    const updateEmployeeList = async (data: Employee, mode: string) => {
+        const obj = defaultValidState(data);
+        const { isValidFirstName, isValidLastName, isValidEmail, isValidPhoneNum, isValidGender, isValidJoinDate } = obj;
+        if (mode === 'Add') {
+            if (isValidFirstName && isValidLastName && isValidEmail && isValidPhoneNum && isValidJoinDate) {
+                employeeData?.unshift(data);
+                setEmployeeData(employeeData);
+                let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
+                if (response) {
+                    setOpen(false);
+                }
+
+                //set validation to default state
+                validationDefaultFunc();
+            } else {
+                validationRefractorFunc(isValidFirstName, isValidLastName, isValidEmail, isValidPhoneNum, isValidGender, isValidJoinDate);
             }
-            if (!isValidLastName) {
-                setLastNameValidation(true);
-            }
-            if (!isValidEmail) {
-                setEmailValidation(true);
-            }
-            if (!isValidPhoneNum) {
-                setPhoneNumValidation(true);
-            }
-            if (!isValidGender) {
-                setGenderValidation(true);
-            }
-            if (!isValidPhoneNum) {
-                setJoinDateValidation(true);
+        } else if (mode === 'Edit') {
+            if (isValidFirstName && isValidLastName && isValidEmail && isValidPhoneNum && isValidJoinDate) {
+                employeeData[editIndex] = data;
+                console.log('🚀 ~ file: Home.tsx:105 ~ updateEmployeeList ~ data:', data);
+                console.log('🚀 ~ file: Home.tsx:106 ~ updateEmployeeList ~ employeeData:', employeeData);
+                setEmployeeData(employeeData);
+                let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
+                if (response) {
+                    setOpen(false);
+                }
+                //set validation to default state
+                validationDefaultFunc();
+            } else {
+                validationRefractorFunc(isValidFirstName, isValidLastName, isValidEmail, isValidPhoneNum, isValidGender, isValidJoinDate);
             }
         }
     };
@@ -94,6 +122,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [value, setValue] = React.useState('Dione');
 
     const handleClickListItem = () => {
+        setDialogTitle('Add Employee');
         setOpen(true);
     };
 
@@ -137,6 +166,13 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
     const handleEdit = (editIndex: number) => {
         console.log('🚀 ~ file: Home.tsx:139 ~ handleEdit ~ editIndex:', editIndex);
+        setEditIndex(editIndex);
+        let deepcopy = JSON.parse(JSON.stringify(employeeData));
+        const result = deepcopy.find((element: any, index: number) => editIndex === index);
+        console.log('🚀 ~ file: Home.tsx:142 ~ handleEdit ~ result:', result);
+        setEditEmployeeData(result);
+        setDialogTitle('Edit Employee Details');
+        setOpen(true);
     };
 
     return (
@@ -161,9 +197,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     </div>
                 </>
             }
-            {/* {newEmployee && <EmployeeForm closeForm={handleCloseForm} addNewEmployee={updateEmployeeList} />} */}
             {
                 <EmployeeFormDialog
+                    editEmployeeData={editEmployeeData}
                     addNewEmployee={updateEmployeeList}
                     id="addNewEmployee"
                     keepMounted
@@ -176,6 +212,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     phoneNumValError={phoneNumValidation}
                     genderInputError={genderValidation}
                     joinDateInputError={joinDateValidation}
+                    dialogTitle={dialogTitle}
                 />
             }
             {<ConfirmationDialog id="ringtone-menu" keepMounted open={openDialog} onClose={handleCloseDialog} value={confirmDialogValue} />}
