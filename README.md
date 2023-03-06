@@ -3,6 +3,9 @@
 <div >
   <img src='src/picture/front-end.png' style='display:block, width: 100%'><br>
 </div>
+<div >
+  <img src='src/picture/front-end-2.png' style='display:block, width: 100%, margin-top: 10px;'><br>
+</div>
 
 ## Project Summary
 
