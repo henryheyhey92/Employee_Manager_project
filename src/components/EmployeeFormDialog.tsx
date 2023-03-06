@@ -158,7 +158,7 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
                     <Grid item xs={12}>
                         <FormControl error={genderInputError}>
                             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                            <RadioGroup row ref={radioGroupRef} aria-label="gender" name="gender" value={addEmployee.gender} onChange={onUpdateFormField}>
+                            <RadioGroup defaultValue="Male" row ref={radioGroupRef} aria-label="gender" name="gender" value={addEmployee.gender} onChange={onUpdateFormField}>
                                 {genderName.map((option) => (
                                     <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
                                 ))}

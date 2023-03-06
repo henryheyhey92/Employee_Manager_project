@@ -33,7 +33,7 @@ export const InitialState = {
     lastName: '',
     email: '',
     phoneNumber: '+65',
-    gender: '',
+    gender: 'Male',
     joinDate: ''
 };
 
