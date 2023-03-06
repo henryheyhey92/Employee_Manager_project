@@ -135,6 +135,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
 
+    const handleEdit = (editIndex: number) => {
+        console.log('🚀 ~ file: Home.tsx:139 ~ handleEdit ~ editIndex:', editIndex);
+    };
+
     return (
         <React.Fragment>
             {
@@ -152,7 +156,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     </Grid>
                     <div>
                         {employeeData?.map((element: Employee, index: number) => {
-                            return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} detailIndex={index} handleDelete={confirmDelete} />;
+                            return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} detailIndex={index} handleDelete={confirmDelete} handleEdit={handleEdit} />;
                         })}
                     </div>
                 </>

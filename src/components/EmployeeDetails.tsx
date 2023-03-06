@@ -10,6 +10,7 @@ import { Employee } from '../Constant/constants';
 interface EmployeeDetailsProps {
     detailIndex: number;
     handleDelete: any;
+    handleEdit: any;
     employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[]>> | any;
 }
@@ -25,11 +26,13 @@ const getDateFunc = (data: string) => {
 };
 
 const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsProps) => {
-    const { employeeData, setEmployeeData, detailIndex, handleDelete } = props;
+    const { employeeData, setEmployeeData, detailIndex, handleDelete, handleEdit } = props;
 
-    const handleEdit = () => {};
     const handleDeleteIndex = (index: number) => {
         handleDelete(index);
+    };
+    const handleEditIndex = (index: number) => {
+        handleEdit(index);
     };
 
     return (
@@ -73,7 +76,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                     <Button style={{ marginTop: 5, marginLeft: 10 }} variant="contained" onClick={() => handleDeleteIndex(detailIndex)}>
                         Delete
                     </Button>
-                    <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
+                    <Button style={{ marginTop: 5 }} variant="contained" onClick={() => handleEditIndex(detailIndex)}>
                         Edit
                     </Button>
                 </Box>
