@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, userType, setUserType } = React.useContext(LoginContext);
     const navigate = useNavigate();
 
     const onLogin = async () => {
@@ -28,11 +28,17 @@ const Login: React.FC<LoginProps> = () => {
                     setIsLoggedIn(true);
                     navigate('/home');
                 }
+                if (setUserType) {
+                    setUserType('admin');
+                }
             } else if (userInfo.email === standardDetails.email && userInfo.password === standardDetails.password) {
                 // set the is standard state to true
                 if (setIsLoggedIn) {
                     setIsLoggedIn(true);
                     navigate('/home');
+                }
+                if (setUserType) {
+                    setUserType('standard');
                 }
             } else {
                 if (setIsNotValid) setIsNotValid(true);
@@ -108,6 +114,15 @@ const Login: React.FC<LoginProps> = () => {
                     <Button onClick={onLogin} style={{ marginTop: 10, marginBottom: 20 }} variant="contained">
                         Login
                     </Button>
+                    <p>
+                        There are two types of account ; <strong>Admin and Standard</strong>
+                    </p>
+                    <p>
+                        <strong>Username:</strong> admin@gmail.com, <strong>Password:</strong> admin1234
+                    </p>
+                    <p>
+                        <strong>Username:</strong> standard@gmail.com, <strong>Password:</strong> standard1234
+                    </p>
                 </Box>
             </Paper>
         </React.Fragment>

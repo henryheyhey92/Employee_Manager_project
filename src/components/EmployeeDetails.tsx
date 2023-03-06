@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Employee } from '../Constant/constants';
+import { LoginContext } from '../contexts/LoginContext';
 
 interface EmployeeDetailsProps {
     detailIndex: number;
@@ -26,6 +27,7 @@ const getDateFunc = (data: string) => {
 };
 
 const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsProps) => {
+    const { userType, setUserType } = React.useContext(LoginContext);
     const { employeeData, setEmployeeData, detailIndex, handleDelete, handleEdit } = props;
 
     const handleDeleteIndex = (index: number) => {
@@ -72,7 +74,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                         </Typography>
                     </Grid>
                 </Grid>
-                <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                <Box sx={{ display: userType === 'admin' ? 'flex' : 'none', flexDirection: 'row-reverse' }}>
                     <Button style={{ marginTop: 5, marginLeft: 10 }} variant="contained" onClick={() => handleDeleteIndex(detailIndex)}>
                         Delete
                     </Button>

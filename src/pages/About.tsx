@@ -41,10 +41,10 @@ const About: React.FC<AboutProps> = (props) => {
                         There are two types of account ; <strong>Admin and Standard</strong>
                     </p>
                     <p>
-                        <strong>Username:</strong> Admin, <strong>Password:</strong> admin123
+                        <strong>Username:</strong> admin@gmail.com, <strong>Password:</strong> admin1234
                     </p>
                     <p>
-                        <strong>Username:</strong> Standard, <strong>Password:</strong> standard123
+                        <strong>Username:</strong> standard@gmail.com, <strong>Password:</strong> standard1234
                     </p>
                 </Box>
             </Paper>

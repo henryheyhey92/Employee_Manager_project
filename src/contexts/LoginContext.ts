@@ -10,6 +10,8 @@ type ContextProps = {
     setIsNotValid: Dispatch<SetStateAction<boolean>>;
     employeeData: Employee[] | any;
     setEmployeeData: Dispatch<React.SetStateAction<Employee[] | any>>;
+    userType: string;
+    setUserType: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const LoginContext = React.createContext<Partial<ContextProps>>({});

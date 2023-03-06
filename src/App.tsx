@@ -21,6 +21,7 @@ const App: React.FC<AppProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const [isNotValid, setIsNotValid] = useState(false);
     const [employeeData, setEmployeeData] = useState<Employee[] | any>([]);
+    const [userType, setUserType] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,7 +47,9 @@ const App: React.FC<AppProps> = (props) => {
                 isNotValid,
                 setIsNotValid,
                 employeeData,
-                setEmployeeData
+                setEmployeeData,
+                userType,
+                setUserType
             }}
         >
             <Router>

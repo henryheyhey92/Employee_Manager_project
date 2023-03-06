@@ -22,8 +22,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const { employeeData, setEmployeeData, passEmployeeData } = props;
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
-
+    const { userType, setUserType } = React.useContext(LoginContext);
     useEffect(() => {}, []);
 
     const [firstNameValidation, setFirstNameValidation] = useState(false);
@@ -102,8 +101,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         } else if (mode === 'Edit') {
             if (isValidFirstName && isValidLastName && isValidEmail && isValidPhoneNum && isValidJoinDate) {
                 employeeData[editIndex] = data;
-                console.log('🚀 ~ file: Home.tsx:105 ~ updateEmployeeList ~ data:', data);
-                console.log('🚀 ~ file: Home.tsx:106 ~ updateEmployeeList ~ employeeData:', employeeData);
                 setEmployeeData(employeeData);
                 let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
                 if (response) {
@@ -141,11 +138,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     };
 
     const handleDelete = async (removeIndex: number) => {
-        console.log('🚀 ~ file: Home.tsx:123 ~ handleDelete ~ removeIndex:', removeIndex);
         let deepcopy = JSON.parse(JSON.stringify(employeeData));
         const result = deepcopy.filter((element: any, index: number) => removeIndex !== index);
-        const response = await axios.post(BASE_URL + 'api/updatedata', result);
-        console.log('What is the response :', response);
+        await axios.post(BASE_URL + 'api/updatedata', result);
         setEmployeeData(result);
         setOpenDialog(false);
     };
@@ -183,7 +178,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                         </Grid>
                         <Grid item xs={5}></Grid>
                         <Grid item xs={2}>
-                            <Fab variant="extended" color="primary" aria-label="add" sx={{ mt: 3 }} onClick={handleClickListItem}>
+                            <Fab variant="extended" color="primary" aria-label="add" sx={{ mt: 3, display: userType === 'admin' ? '' : 'none' }} onClick={handleClickListItem}>
                                 <AddIcon sx={{ mr: 1 }} />
                                 Add New
                             </Fab>

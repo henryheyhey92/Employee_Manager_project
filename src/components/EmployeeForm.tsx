@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps) => {
-    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData } = React.useContext(LoginContext);
+    const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid, employeeData, setEmployeeData, userType, setUserType } = React.useContext(LoginContext);
 
     const [addEmployee, setEmployee] = useState(initialState);
     const { closeForm, addNewEmployee } = props;
