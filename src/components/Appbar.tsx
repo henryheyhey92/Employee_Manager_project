@@ -4,15 +4,17 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { LoginContext } from '../contexts/LoginContext';
 import { toggleLogin } from '../utils/toggleLogin';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import gic from '../picture/giclogo.png';
+import Fab from '@mui/material/Fab';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 const ButtonAppBar = () => {
-    const { isLoggedIn, loading, setLoading, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
+    const { isLoggedIn, setLoading, setIsLoggedIn } = React.useContext(LoginContext);
     const navigate = useNavigate();
 
     const onLogout = async () => {
@@ -30,74 +32,57 @@ const ButtonAppBar = () => {
     };
 
     return (
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#ebeff0' }}>
             <Container maxWidth="xl">
                 <Toolbar>
                     <Grid container>
                         <Grid item xs={5}>
                             <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                                <Typography
-                                    variant="h6"
-                                    noWrap
-                                    component="a"
-                                    href="/"
-                                    sx={{
-                                        mr: 2,
-                                        display: { xs: 'none', md: 'flex' },
-                                        fontFamily: 'monospace',
-                                        fontWeight: 700,
-                                        letterSpacing: '.3rem',
-                                        color: 'inherit',
-                                        textDecoration: 'none'
-                                    }}
-                                >
-                                    E-GIC
-                                </Typography>
+                                <img src={gic} style={{ width: 'auto', height: '50px' }} />
                             </Box>
                         </Grid>
                         <Grid item xs={6}></Grid>
                         <Grid item xs={1}>
                             {!isLoggedIn ? (
-                                <Button color="inherit" component={Link} to="/login">
+                                <Fab sx={{ mt: 1 }} variant="extended" size="medium" color="primary" aria-label="add" component={Link} to="/login">
+                                    <VpnKeyIcon sx={{ mr: 1 }} />
                                     <Typography
                                         variant="h6"
                                         noWrap
                                         component="a"
                                         href="/"
                                         sx={{
-                                            mr: 2,
                                             display: { xs: 'none', md: 'flex' },
-                                            fontFamily: 'monospace',
-                                            fontWeight: 700,
-                                            letterSpacing: '.3rem',
-                                            color: 'inherit',
+                                            fontFamily: 'Sans-serif',
+                                            fontWeight: 500,
+                                            letterSpacing: '.1rem',
+                                            color: '#fff',
                                             textDecoration: 'none'
                                         }}
                                     >
                                         Login
                                     </Typography>
-                                </Button>
+                                </Fab>
                             ) : (
-                                // </Link>
-                                <Button color="inherit" onClick={() => onLogout()}>
+                                <Fab variant="extended" size="medium" color="primary" aria-label="add" onClick={() => onLogout()}>
+                                    <VpnKeyIcon sx={{ mr: 1 }} />
                                     <Typography
                                         variant="h6"
                                         noWrap
                                         component="a"
                                         href="/"
                                         sx={{
-                                            mr: 2,
                                             display: { xs: 'none', md: 'flex' },
-                                            fontFamily: 'monospace',
-                                            fontWeight: 700,
-                                            letterSpacing: '.3rem',
-                                            color: 'inherit',
+                                            fontFamily: 'Sans-serif',
+                                            fontWeight: 500,
+                                            letterSpacing: '.1rem',
+                                            color: '#edf2f7',
                                             textDecoration: 'none'
                                         }}
                                     >
                                         Logout
                                     </Typography>
-                                </Button>
+                                </Fab>
                             )}
                         </Grid>
                     </Grid>
