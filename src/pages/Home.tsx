@@ -12,7 +12,7 @@ import EmployeeForm from '../components/EmployeeForm';
 import { BASE_URL } from '../Constant/constants';
 import EmployeeFormDialog from '../components/EmployeeFormDialog';
 import { firstNameAndLastValidation, validateEmail, validatePhoneNumber, validateGender, validateJoinDate } from '../validation/validation';
-import { ErrorState } from '../Constant/constants';
+import ConfirmationDialog from '../components/ConfirmationDialog';
 interface HomeProps {
     employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[] | any>>;
@@ -32,6 +32,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [phoneNumValidation, setPhoneNumValidation] = useState(false);
     const [genderValidation, setGenderValidation] = useState(false);
     const [joinDateValidation, setJoinDateValidation] = useState(false);
+    const [openConfirmationDialog, setConfirmationDialog] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [confirmDialogValue, setConfirmDialogValue] = useState('Dione');
+    const [removeIndex, setRemoveIndex] = useState<number>(0);
 
     // const handleAddEmployee = () => {
     //     setNewEmployee(true);
@@ -118,6 +122,30 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
 
+    const handleDelete = async (removeIndex: number) => {
+        console.log('🚀 ~ file: Home.tsx:123 ~ handleDelete ~ removeIndex:', removeIndex);
+        let deepcopy = JSON.parse(JSON.stringify(employeeData));
+        const result = deepcopy.filter((element: any, index: number) => removeIndex !== index);
+        const response = await axios.post(BASE_URL + 'api/updatedata', result);
+        console.log('What is the response :', response);
+        setEmployeeData(result);
+        setOpenDialog(false);
+    };
+
+    const confirmDelete = (removeIndex: number) => {
+        setConfirmationDialog(true);
+        setOpenDialog(true);
+        setRemoveIndex(removeIndex);
+    };
+
+    const handleCloseDialog = (newValue?: string) => {
+        if (newValue) {
+            handleDelete(removeIndex);
+        } else {
+            setOpenDialog(false);
+        }
+    };
+
     return (
         <React.Fragment>
             {
@@ -134,8 +162,8 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                         </Grid>
                     </Grid>
                     <div>
-                        {employeeData?.map((element: Employee, index: any) => {
-                            return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} />;
+                        {employeeData?.map((element: Employee, index: number) => {
+                            return <EmployeeDetails employeeData={element} setEmployeeData={setEmployeeData} detailIndex={index} handleDelete={confirmDelete} />;
                         })}
                     </div>
                 </>
@@ -157,6 +185,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     joinDateInputError={joinDateValidation}
                 />
             }
+            {<ConfirmationDialog id="ringtone-menu" keepMounted open={openDialog} onClose={handleCloseDialog} value={confirmDialogValue} />}
         </React.Fragment>
     );
 };

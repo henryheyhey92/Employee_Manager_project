@@ -8,13 +8,19 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Employee } from '../Constant/constants';
 
 interface EmployeeDetailsProps {
+    detailIndex: number;
+    handleDelete: any;
     employeeData: Employee[] | any;
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[]>> | any;
 }
 
 const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsProps) => {
+    const { employeeData, setEmployeeData, detailIndex, handleDelete } = props;
+
     const handleEdit = () => {};
-    const { employeeData, setEmployeeData } = props;
+    const handleDeleteIndex = (index: number) => {
+        handleDelete(index);
+    };
 
     return (
         <Card sx={{ width: 'auto', m: 5 }}>
@@ -54,7 +60,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                     </Grid>
                 </Grid>
                 <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                    <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
+                    <Button style={{ marginTop: 5, marginLeft: 10 }} variant="contained" onClick={() => handleDeleteIndex(detailIndex)}>
                         Delete
                     </Button>
                     <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
