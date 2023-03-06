@@ -38,9 +38,15 @@ const NoPermissionPage: React.FC<NoPermissionPageProps> = (props) => {
                         Currently you are on the <strong>No permission</strong> page, {!isLoggedIn && 'not'} being logged in.
                     </p>
                     <p> this page is accessible for everybody, being logged in or not.</p>
-                    <Button color="inherit" component={Link} to="/login" style={{ marginTop: 10, marginBottom: 20 }} variant="contained">
-                        Back to Login Page
-                    </Button>
+                    {isLoggedIn ? (
+                        <Button color="inherit" component={Link} to="/home" style={{ marginTop: 10, marginBottom: 20 }} variant="contained">
+                            Back to Home Page
+                        </Button>
+                    ) : (
+                        <Button color="inherit" component={Link} to="/login" style={{ marginTop: 10, marginBottom: 20 }} variant="contained">
+                            Back to Login Page
+                        </Button>
+                    )}
                 </Box>
             </Paper>
         </React.Fragment>

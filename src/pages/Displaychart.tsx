@@ -33,7 +33,13 @@ const Chart = (props: ChartProps) => {
             xaxis: {
                 categories: pastYears,
                 title: {
-                    text: 'Number of employees'
+                    text: 'Number of employees',
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: 'Gill Sans, sans-serif',
+                        color: '#263238'
+                    }
                 },
                 labels: {
                     formatter: (value) => {
@@ -44,7 +50,13 @@ const Chart = (props: ChartProps) => {
             },
             yaxis: {
                 title: {
-                    text: 'Year'
+                    text: 'Year',
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: 'Gill Sans, sans-serif',
+                        color: '#263238'
+                    }
                 },
                 labels: {
                     formatter: (value) => {
@@ -98,6 +110,23 @@ const Chart = (props: ChartProps) => {
         xaxis: {
             // categories: [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]
             categories: []
+        },
+        fill: {
+            colors: ['#36f482']
+        },
+        title: {
+            text: 'Number of employees joined each year for the past 10 years',
+            align: 'center',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize: '20px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                color: '#263238'
+            }
         }
     });
 

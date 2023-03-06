@@ -19,12 +19,18 @@ import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 
 export default function ClippedDrawer() {
     const { loading, setLoading, isLoggedIn, setIsLoggedIn, isNotValid, setIsNotValid } = React.useContext(LoginContext);
 
+    const handleLogout = () => {
+        if (setIsLoggedIn) {
+            setIsLoggedIn(false);
+        }
+    };
     return (
         <Drawer
             variant="permanent"
@@ -62,6 +68,21 @@ export default function ClippedDrawer() {
                         </ListItemIcon>
                         <ListItemText primary="Chart" />
                     </ListItemButton>
+                    {isLoggedIn ? (
+                        <ListItemButton onClick={handleLogout}>
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" />
+                        </ListItemButton>
+                    ) : (
+                        <ListItemButton component={Link} to="/login">
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Login" />
+                        </ListItemButton>
+                    )}
                 </List>
             </Box>
         </Drawer>
