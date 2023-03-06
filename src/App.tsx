@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import { BASE_URL } from './Constant/constants';
 import axios from 'axios';
 import { Employee } from './Constant/constants';
+import Displaychart from './pages/Displaychart';
 
 interface AppProps {}
 
@@ -66,6 +67,7 @@ const App: React.FC<AppProps> = (props) => {
                             <Route path="/nopermission" element={<NoPermissionPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/contact" element={<Contact />} />
+                            <Route path="/chart" element={<Displaychart />} />
                         </Routes>
                     </Box>
                 </Box>

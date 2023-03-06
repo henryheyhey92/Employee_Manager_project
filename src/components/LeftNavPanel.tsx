@@ -18,6 +18,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const drawerWidth = 240;
 
@@ -55,11 +56,11 @@ export default function ClippedDrawer() {
                         </ListItemIcon>
                         <ListItemText primary="Contact us" />
                     </ListItemButton>
-                    <ListItemButton component={Link} to="/login">
+                    <ListItemButton component={Link} to="/chart">
                         <ListItemIcon>
-                            <LoginIcon />
+                            <BarChartIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Login" />
+                        <ListItemText primary="Chart" />
                     </ListItemButton>
                 </List>
             </Box>
