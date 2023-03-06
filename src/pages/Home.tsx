@@ -49,6 +49,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
     const updateEmployeeList = async (data: Employee) => {
         const { firstName, lastName, email, gender, phoneNumber, joinDate } = data;
+        console.log('🚀 ~ file: Home.tsx:52 ~ updateEmployeeList ~ joinDate:', joinDate);
         console.log('🚀 ~ file: Home.tsx:48 ~ updateEmployeeList ~ phoneNumber:', phoneNumber);
         setFirstNameValidation(false);
         setLastNameValidation(false);
@@ -58,11 +59,17 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         setJoinDateValidation(false);
 
         const isValidFirstName = firstNameAndLastValidation(firstName);
+        console.log('🚀 ~ file: Home.tsx:61 ~ updateEmployeeList ~ isValidFirstName:', isValidFirstName);
         const isValidLastName = firstNameAndLastValidation(lastName);
+        console.log('🚀 ~ file: Home.tsx:63 ~ updateEmployeeList ~ isValidLastName:', isValidLastName);
         const isValidEmail = validateEmail(email);
+        console.log('🚀 ~ file: Home.tsx:65 ~ updateEmployeeList ~ isValidEmail:', isValidEmail);
         const isValidPhoneNum = validatePhoneNumber(phoneNumber);
+        console.log('🚀 ~ file: Home.tsx:67 ~ updateEmployeeList ~ isValidPhoneNum:', isValidPhoneNum);
         const isValidGender = validateGender(gender);
+        console.log('🚀 ~ file: Home.tsx:69 ~ updateEmployeeList ~ isValidGender:', isValidGender);
         const isValidJoinDate = validateJoinDate(joinDate);
+        console.log('🚀 ~ file: Home.tsx:71 ~ updateEmployeeList ~ isValidJoinDate:', isValidJoinDate);
 
         if (isValidFirstName && isValidLastName && isValidEmail && isValidPhoneNum && isValidJoinDate) {
             employeeData?.unshift(data);

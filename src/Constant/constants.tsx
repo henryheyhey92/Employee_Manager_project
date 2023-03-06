@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+const currentDate = new Date();
+
 export const adminDetails = {
     email: 'admin@gmail.com',
     password: 'admin1234'
@@ -34,7 +36,7 @@ export const InitialState = {
     email: '',
     phoneNumber: '+65',
     gender: 'Male',
-    joinDate: ''
+    joinDate: currentDate.toString()
 };
 
 export const ErrorState = {

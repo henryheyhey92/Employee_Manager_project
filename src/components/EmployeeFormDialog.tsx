@@ -45,6 +45,7 @@ const genderName = ['Male', 'Female', 'Other'];
 const today = dayjs();
 const yesterday = dayjs().subtract(1, 'day');
 const todayStartOfTheDay = today.startOf('day');
+const currentDate = new Date();
 
 const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFormDialogProps) => {
     const { firstNameValError, lastNameValError, emailValError, phoneNumValError, genderInputError, joinDateInputError, addNewEmployee, onClose, value: valueProp, open, ...other } = props;
@@ -85,7 +86,7 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
     };
 
     //dayjs('2014-08-18T21:11:54')
-    const [dateValue, setdateValue] = React.useState<Dayjs | null>();
+    const [dateValue, setdateValue] = React.useState<Dayjs | null>(today);
 
     const handleChange = (newValue: Dayjs | any) => {
         const date = new Date(newValue);

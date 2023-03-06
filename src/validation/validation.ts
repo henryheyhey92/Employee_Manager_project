@@ -37,15 +37,12 @@ export const validateGender = (gender: string) => {
 };
 
 export const validateJoinDate = (joinDate: string) => {
+    console.log('🚀 ~ file: validation.ts:40 ~ validateJoinDate ~ joinDate:', joinDate);
     const inputDate = new Date(joinDate);
     const currentDate = new Date();
 
-    if (joinDate.trim() !== '') {
-        if (inputDate <= currentDate) {
-            return true;
-        } else {
-            return false;
-        }
+    if (joinDate) {
+        return true;
     } else {
         return false;
     }
