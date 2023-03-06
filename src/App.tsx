@@ -14,6 +14,7 @@ import { BASE_URL } from './Constant/constants';
 import axios from 'axios';
 import { Employee } from './Constant/constants';
 import Displaychart from './pages/Displaychart';
+import ChartRoute from './components/ChartRoute';
 
 interface AppProps {}
 
@@ -64,10 +65,12 @@ const App: React.FC<AppProps> = (props) => {
                             <Route element={<PrivateRoute />}>
                                 <Route path="/home" element={<Home employeeData={employeeData} setEmployeeData={setEmployeeData} passEmployeeData={passEmployeeData} />} />
                             </Route>
+                            <Route element={<ChartRoute />}>
+                                <Route path="/chart" element={<Displaychart employeeData={employeeData} setEmployeeData={setEmployeeData} />} />
+                            </Route>
                             <Route path="/nopermission" element={<NoPermissionPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/contact" element={<Contact />} />
-                            <Route path="/chart" element={<Displaychart />} />
                         </Routes>
                     </Box>
                 </Box>

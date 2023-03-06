@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { LoginContext } from '../contexts/LoginContext';
 
-const PrivateRoute = () => {
+const ChartRoute = () => {
     const { isLoggedIn, userType } = React.useContext(LoginContext);
 
-    return isLoggedIn ? <Outlet /> : <Navigate to="/nopermission" />;
+    return userType === 'admin' ? <Outlet /> : <Navigate to="/nopermission" />;
 };
 
-export default PrivateRoute;
+export default ChartRoute;
