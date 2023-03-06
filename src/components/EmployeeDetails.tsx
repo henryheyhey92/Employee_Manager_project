@@ -55,6 +55,9 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                 </Grid>
                 <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
                     <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
+                        Delete
+                    </Button>
+                    <Button style={{ marginTop: 5 }} variant="contained" onClick={handleEdit}>
                         Edit
                     </Button>
                 </Box>

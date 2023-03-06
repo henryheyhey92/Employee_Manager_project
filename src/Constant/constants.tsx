@@ -19,13 +19,31 @@ export type Employee = {
     joinDate: string;
 };
 
+export type ErrorType = {
+    firstName: boolean;
+    lastName: boolean;
+    email: boolean;
+    phoneNumber: boolean;
+    gender: boolean;
+    joinDate: boolean;
+};
+
 export const InitialState = {
     firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: '',
+    phoneNumber: '+65',
     gender: '',
     joinDate: ''
+};
+
+export const ErrorState = {
+    firstName: false,
+    lastName: false,
+    email: false,
+    phoneNumber: false,
+    gender: false,
+    joinDate: false
 };
 
 export const BASE_URL = 'http://localhost:5000/';
