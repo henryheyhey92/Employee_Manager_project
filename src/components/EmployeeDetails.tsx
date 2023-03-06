@@ -14,6 +14,16 @@ interface EmployeeDetailsProps {
     setEmployeeData: React.Dispatch<React.SetStateAction<Employee[]>> | any;
 }
 
+const getDateFunc = (data: string) => {
+    const date = new Date(data);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    const result = `${day}/${month}/${year}`;
+    return result;
+};
+
 const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsProps) => {
     const { employeeData, setEmployeeData, detailIndex, handleDelete } = props;
 
@@ -55,7 +65,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props: EmployeeDetailsP
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            <div style={{ display: 'block' }}>Join Date : {employeeData.joinDate}</div>
+                            <div style={{ display: 'block' }}>Join Date : {getDateFunc(employeeData.joinDate)}</div>
                         </Typography>
                     </Grid>
                 </Grid>
