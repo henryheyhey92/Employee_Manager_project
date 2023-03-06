@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+# Project 02 - React Art Space SG
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div >
+  <img src='src/picture/front-end.png' style='display:block, width: 100%'><br>
+</div>
 
-## Available Scripts
+## Project Summary
 
-In the project directory, you can run:
+**Context** This is a front end take home assignment for front end application dev role
 
-### `npm start`
+**User Goal**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The aim of this assignment is to create a CRUD application that can keep track of employee's record and the year the number of employee have enrolled.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## How to start:
 
-### `npm test`
+Please git clone the project or use gitpod to access from the web browser. Run "npm install" and follow by "npm start".
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## The Back End:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The backend is a simple Node js application. User have to run the back end first before it can connect to the front end. Run "npm install", follow by "npm install -g nodemon" and lastly "nodemon
+start" here is the link fo [Backend project ](https://github.com/henryheyhey92/employee_Backend_GIC)
