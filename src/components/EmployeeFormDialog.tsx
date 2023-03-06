@@ -68,8 +68,13 @@ const EmployeeFormDialog: React.FC<EmployeeFormDialogProps> = (props: EmployeeFo
         if (!open) {
             setValue(valueProp);
         }
-        setEmployee(editEmployeeData);
-        setdateValue(dayjs(editEmployeeData.joinDate));
+        if (dialogTitle === 'Add Employee') {
+            setEmployee(InitialState);
+            setdateValue(dayjs(new Date()));
+        } else if (dialogTitle === 'Edit Employee Details') {
+            setEmployee(editEmployeeData);
+            setdateValue(dayjs(editEmployeeData.joinDate));
+        }
     }, [valueProp, open]);
 
     const handleEntering = () => {
