@@ -7,7 +7,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { Grid } from '@mui/material';
 import axios from 'axios';
-import { Employee } from '../Constant/constants';
+import { Employee, InitialState } from '../Constant/constants';
 import EmployeeForm from '../components/EmployeeForm';
 import { BASE_URL } from '../Constant/constants';
 import EmployeeFormDialog from '../components/EmployeeFormDialog';
@@ -76,7 +76,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
             setEmployeeData(employeeData);
             let response = await axios.post(BASE_URL + 'api/updatedata', employeeData);
             console.log('What is the response :', response);
-            setNewEmployee(false);
+
+            if (response) {
+                setOpen(false);
+            }
 
             //set validation to default state
             setFirstNameValidation(false);
