@@ -5,7 +5,7 @@ import EmployeeDetails from '../components/EmployeeDetails';
 import { Box } from '@mui/system';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { Employee, InitialState } from '../Constant/constants';
 import EmployeeForm from '../components/EmployeeForm';
@@ -165,11 +165,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     };
 
     const handleEdit = (editIndex: number) => {
-        console.log('🚀 ~ file: Home.tsx:139 ~ handleEdit ~ editIndex:', editIndex);
         setEditIndex(editIndex);
         let deepcopy = JSON.parse(JSON.stringify(employeeData));
         const result = deepcopy.find((element: any, index: number) => editIndex === index);
-        console.log('🚀 ~ file: Home.tsx:142 ~ handleEdit ~ result:', result);
         setEditEmployeeData(result);
         setDialogTitle('Edit Employee Details');
         setOpen(true);
@@ -183,10 +181,11 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                         <Grid item xs={5}>
                             <h1>The employee information</h1>
                         </Grid>
-                        <Grid item xs={6}></Grid>
-                        <Grid item xs={1}>
-                            <Fab color="primary" aria-label="add" onClick={handleClickListItem}>
-                                <AddIcon />
+                        <Grid item xs={5}></Grid>
+                        <Grid item xs={2}>
+                            <Fab variant="extended" color="primary" aria-label="add" sx={{ mt: 3 }} onClick={handleClickListItem}>
+                                <AddIcon sx={{ mr: 1 }} />
+                                Add New
                             </Fab>
                         </Grid>
                     </Grid>
