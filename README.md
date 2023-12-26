@@ -28,3 +28,5 @@ Please git clone the project or use gitpod to access from the web browser. Run "
 
 The backend is a simple Node js application. User have to run the back end first before it can connect to the front end. Run "npm install", follow by "npm install -g nodemon" and lastly "nodemon
 start" here is the link to [Node js Backend project ](https://github.com/henryheyhey92/employee_Backend_GIC)
+
+[here](https://ch-api.healthhub.sg/api/public/content/2db6cc70d1974ab7843ffcfca75b4ce4?#page=17)
